@@ -32,6 +32,19 @@ class BorrowerUsecase {
   static delete_reg_borrowers(id) {
     return `DELETE FROM borrowers WHERE Id = '${id}'`;
   }
+  static create_user() {
+    return `INSERT INTO users(
+      Id ,
+      Email ,
+      Password ,
+      CreatedDate ,
+      LastModifiedDate
+
+      ) 
+  VALUES ?;
+  `;
+
+  }
 
 
 }

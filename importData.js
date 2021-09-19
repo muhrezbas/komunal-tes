@@ -28,7 +28,7 @@ con.connect(async function (err) {
         data.pipe(csv())
             .on('data', (data) => csvData.push(data))
             .on('end', () => {
-              
+
 
                 // console.log(csvData, "dataa")
                 let createDatabase =
@@ -61,7 +61,7 @@ con.connect(async function (err) {
                                     //     console.log(element, "test")
                                     // }
                                     // else {
-                                        
+
                                     // }
                                     finalData.push(newDate)
 
@@ -94,11 +94,23 @@ con.connect(async function (err) {
                                 conWithDatabase.query(sql, [values], function (err, results) {
                                     if (err) {
                                         // err.object = dataJson
-                                      console.log(err.message)
-                                    console.log('error')
+                                        console.log(err.message)
+                                        console.log('error')
                                     }
                                     else {
                                         console.log(results)
+                                        let createTableUser = "CREATE TABLE IF NOT EXISTS users (Id varchar(200) NOT NULL, Email varchar(200)  NULL , Password varchar(200)  NULL, CreatedDate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, LastModifiedDate timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP, deleted_at timestamp NULL DEFAULT NULL, PRIMARY KEY (id))"
+                                        conWithDatabase.query(createTableUser, async (err, result) => {
+                                            if (err) {
+                                                // err.object = dataJson
+                                                console.log(err.message)
+                                                console.log('error')
+                                            }
+                                            else {
+                                                console.log(result)
+
+                                            }
+                                        });
 
                                     }
 

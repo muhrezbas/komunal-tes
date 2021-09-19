@@ -29,23 +29,19 @@ exports.createBorrower = [
         .withMessage('Must be a number')
 
 ];
-exports.updateBorrower = [
-    body('CustomerName')
-        .isLength({ min: 1 })
-        .withMessage('Must be at least 1 chars long'),
-    body('DatePurchase')
-        .isLength({ min: 1 })
-        .withMessage('Must be at least 1 chars long'),
-    body('Amount_due__c')
-        .isNumeric()
-        .withMessage('Must be a number'),
-    body('Discount__c')
-        .isNumeric()
-        .withMessage('Must be a number'),
-    body('GST__c')
-        .isNumeric()
-        .withMessage('Must be a number')
-
+exports.createUser = [
+    body('email')
+        .exists()
+        .withMessage('Email is required')
+        .isEmail()
+        .withMessage('Must be a valid email')
+        .normalizeEmail(),
+    body('password')
+        .exists()
+        .withMessage('Password is required')
+        .notEmpty()
+        .isLength({ min: 6 })
+        .withMessage('Password must contain at least 6 characters')
 ];
 
 exports.validateLogin = [

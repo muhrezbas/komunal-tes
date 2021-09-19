@@ -1,6 +1,7 @@
 const db = require("../configs/mysql");
 const { validationResult } = require('express-validator');
 const query = require("../usecase/borrower");
+const encrypt = require("../helpers/encrypt")
 const { v4: uuidv4 } = require('uuid');
 const today = new Date()
 function isNumeric(str) {
@@ -27,9 +28,57 @@ checkValidation = (req) => {
   }
 }
 class BorrowerController {
+  static registerUser(req, res, next) {
+    checkValidation(req);
+    let body = req.body
+    const data = [[
+      uuidv4(),
+      body.email,
+      encrypt(body.password),
+      new Date(),
+      new Date(),
+    ]]
+    // console.log(data)
+      db.query(query.create_user(), [data], async (err, result) => {
+        // console.log(borrower)
+        if (err) {
+          res.status(500).json(err)
+        } else {
+          res.status(200).json(result)
+
+        }
+      });
+  }
+  static loginUser(req, res, next) {
+    checkValidation(req);
+    let body = req.body
+    const data = [[
+      uuidv4(),
+      body.email,
+      encrypt(body.password),
+      new Date(),
+      new Date(),
+    ]]
+    // console.log(data)
+      db.query(query.create_user(), [data], async (err, result) => {
+        // console.log(borrower)
+        if (err) {
+          res.status(500).json(err)
+        } else {
+          res.status(200).json(result)
+
+        }
+      });
+  }
 
   static getBorrowerById(req, res, next) {
     db.query(query.read_reg_borrower_id(req.params.id), async (err, result) => {
+      // console.log(result);
+      res.status(200).json(result);
+    });
+  }
+  static deleteBorrowerById(req, res, next) {
+    db.query(query.delete_reg_borrowers(req.params.id), async (err, result) => {
       // console.log(result);
       res.status(200).json(result);
     });
