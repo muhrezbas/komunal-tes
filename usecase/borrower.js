@@ -26,6 +26,12 @@ class BorrowerUsecase {
         VALUES ?;
         `;
   }
+  static update_reg_borrower(id, data) {
+    return `UPDATE borrowers SET CustomerName = '${data.CustomerName}', DatePurchase = ${data.DatePurchase}, Amount_due__c = ${data.Amount_due__c},  Discount__c = ${data.Discount__c}, GST__c = ${data.GST__c}, LastModifiedDate = '${data.LastModifiedDate.toISOString().slice(0, 19).replace('T', ' ')}' WHERE Id = '${id}'`;
+  }
+  static delete_reg_borrowers(id) {
+    return `DELETE FROM borrowers WHERE Id = '${id}'`;
+  }
 
 
 }

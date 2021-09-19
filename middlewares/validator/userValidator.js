@@ -29,6 +29,24 @@ exports.createBorrower = [
         .withMessage('Must be a number')
 
 ];
+exports.updateBorrower = [
+    body('CustomerName')
+        .isLength({ min: 1 })
+        .withMessage('Must be at least 1 chars long'),
+    body('DatePurchase')
+        .isLength({ min: 1 })
+        .withMessage('Must be at least 1 chars long'),
+    body('Amount_due__c')
+        .isNumeric()
+        .withMessage('Must be a number'),
+    body('Discount__c')
+        .isNumeric()
+        .withMessage('Must be a number'),
+    body('GST__c')
+        .isNumeric()
+        .withMessage('Must be a number')
+
+];
 
 exports.validateLogin = [
     body('email')

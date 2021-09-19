@@ -7,5 +7,6 @@ const awaitHandlerFactory = require('../middlewares/awaitHandlerFactory');
 router.get('/data',controller.getBorrower)
 router.get('/data/:id',controller.getBorrowerById)
 router.post('/create', createBorrower, controller.postBorrower )
+router.patch('/data/:id',  controller.updateRegBorrower)
 
 module.exports = router
