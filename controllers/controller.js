@@ -47,7 +47,10 @@ class BorrowerController {
       if (err) {
         res.status(500).json(err)
       } else {
-        res.status(200).json(result)
+        const token = jwt.sign({ username: body.Email }, secret, { expiresIn: "6h" })
+        console.log(token, "woyy disini")
+        res.status(201).json({ access_token: token})
+        // res.status(201).json(result)
 
       }
     });
@@ -62,8 +65,8 @@ class BorrowerController {
         res.status(400).json({
           message: "Invalid email/password"
         })
-      }
-      console.log('berhasil')
+      }else {
+        console.log(result)
       userData = result[0]
       let valid = await bcrypt.compare(body.password, result[0].Password)
 
@@ -80,6 +83,8 @@ class BorrowerController {
           message: "Invalid email/password"
         })
       }
+      }
+      
 
     })
 
@@ -134,7 +139,7 @@ class BorrowerController {
       if (err) {
         res.status(500).json(err)
       } else {
-        res.status(200).json(result)
+        res.status(201).json(result)
 
       }
     });
