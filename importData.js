@@ -33,7 +33,7 @@ con.connect(async function (err) {
                 // console.log(csvData, "dataa")
                 let createDatabase =
                     `CREATE DATABASE IF NOT EXISTS ${process.env.MYSQL_DATABASE};`
-                let createTable = `CREATE TABLE IF NOT EXISTS borrowers (Id varchar(200) NOT NULL, CustomerName varchar(200)  NULL, DatePurchase varchar(200)  NULL, Amount_due__c decimal(15,2) NOT NULL, Discount__c decimal(15,2) NOT NULL, GST__c decimal(15,2) NOT NULL, CreatedDate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, LastModifiedDate timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP, deleted_at timestamp NULL DEFAULT NULL, PRIMARY KEY (id))`
+                let createTable = `CREATE TABLE IF NOT EXISTS borrowers (Id varchar(200) NOT NULL, CustomerName varchar(200)  NULL, DatePurchase varchar(200)  NULL, Amount_due__c decimal(15,2)  NULL, Discount__c decimal(15,2) NOT NULL, GST__c decimal(15,2) NOT NULL, CreatedDate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, LastModifiedDate timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP, deleted_at timestamp NULL DEFAULT NULL, PRIMARY KEY (id))`
                 con.query(createDatabase, async (err, result) => {
                     console.log('create database success')
                     conWithDatabase.connect(function (err) {
@@ -94,8 +94,9 @@ con.connect(async function (err) {
                                 conWithDatabase.query(sql, [values], function (err, results) {
                                     if (err) {
                                         // err.object = dataJson
+                                        // console.log(err)
                                         console.log(err.message)
-                                        console.log('error')
+                                        console.log('error disini')
                                     }
                                     else {
                                         console.log(results)

@@ -1,0 +1,12 @@
+version: '3'
+services:
+    api_compro:
+        image: "komunal-test"
+        container_name: komunal-test
+        volumes:
+            - /etc/localtime:/etc/localtime
+        env_file:
+            - .env
+        ports:
+            - "${WEB_PORT}:${WEB_PORT}"
+        restart: always
