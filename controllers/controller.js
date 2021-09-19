@@ -2,7 +2,10 @@ const db = require("../configs/mysql");
 const { validationResult } = require('express-validator');
 const query = require("../usecase/borrower");
 const encrypt = require("../helpers/encrypt")
+const bcrypt = require("bcryptjs")
 const { v4: uuidv4 } = require('uuid');
+const secret = process.env.SECRET
+const jwt = require("jsonwebtoken")
 const today = new Date()
 function isNumeric(str) {
   if (typeof str != "string") {
@@ -39,36 +42,48 @@ class BorrowerController {
       new Date(),
     ]]
     // console.log(data)
-      db.query(query.create_user(), [data], async (err, result) => {
-        // console.log(borrower)
-        if (err) {
-          res.status(500).json(err)
-        } else {
-          res.status(200).json(result)
+    db.query(query.create_user(), [data], async (err, result) => {
+      // console.log(borrower)
+      if (err) {
+        res.status(500).json(err)
+      } else {
+        res.status(200).json(result)
 
-        }
-      });
+      }
+    });
   }
   static loginUser(req, res, next) {
     checkValidation(req);
     let body = req.body
-    const data = [[
-      uuidv4(),
-      body.email,
-      encrypt(body.password),
-      new Date(),
-      new Date(),
-    ]]
-    // console.log(data)
-      db.query(query.create_user(), [data], async (err, result) => {
-        // console.log(borrower)
-        if (err) {
-          res.status(500).json(err)
-        } else {
-          res.status(200).json(result)
+    var userData = null
+    db.query(query.read_user_email(body.email), async (err, result) => {
+      console.log(result)
+      if (result.length <= 0) {
+        res.status(400).json({
+          message: "Invalid email/password"
+        })
+      }
+      console.log('berhasil')
+      userData = result[0]
+      let valid = await bcrypt.compare(body.password, result[0].Password)
 
-        }
-      });
+      if (valid) {
+        console.log(userData, "akudisini")
+
+        // .catch(next);
+        // console.log(secret)
+        const token = jwt.sign({ username: userData.Email }, secret, { expiresIn: "6h" })
+        console.log(token, "woyy disini")
+        res.status(200).json({ access_token: token, username: userData.Email })
+      } else {
+        res.status(400).json({
+          message: "Invalid email/password"
+        })
+      }
+
+    })
+
+
   }
 
   static getBorrowerById(req, res, next) {

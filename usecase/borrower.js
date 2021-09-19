@@ -11,6 +11,7 @@ class BorrowerUsecase {
     return `SELECT * FROM borrowers
     where Id = "${id}"`;
   }
+
   static create_reg_borrower() {
     return `INSERT INTO borrowers(
             Id ,
@@ -44,6 +45,11 @@ class BorrowerUsecase {
   VALUES ?;
   `;
 
+  }
+  static read_user_email(email) {
+    console.log(email, "email")
+    return `SELECT * FROM users
+    where Email = "${email}"`;
   }
 
 
