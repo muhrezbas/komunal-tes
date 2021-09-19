@@ -1,0 +1,206 @@
+{
+	"info": {
+		"_postman_id": "4350770b-8330-444f-90d2-4fe941f731b4",
+		"name": "komunal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"reza@gmail.com\", \"password\": \"12345678\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2048/api/register",
+					"host": [
+						"localhost"
+					],
+					"port": "2048",
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"asd@gmail.com\",\n    \"password\": \"w12wd\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2048/api/login",
+					"host": [
+						"localhost"
+					],
+					"port": "2048",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create borrower",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\t\"CustomerName\" : \"tes\",\n\t\t\"DatePurchase\" : \"20151100275\",\n\t\t\"Amount_due__c\" : 0,\n\t\t\"Discount__c\" : 0,\n\t\t\"GST__c\" : 0\n\t}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2048/api/create",
+					"host": [
+						"localhost"
+					],
+					"port": "2048",
+					"path": [
+						"api",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "borrower all",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im11aHJlemJhc3VraUBnbWFpbC5jb20iLCJpYXQiOjE2MzIwNjc0OTYsImV4cCI6MTYzMjA4OTA5Nn0.Xqtk58cl1s4VuwUPO1TYnSU-BO2uGFQysBUz3IkhCuI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:2048/api/data?page=5&limit=10",
+					"host": [
+						"localhost"
+					],
+					"port": "2048",
+					"path": [
+						"api",
+						"data"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "5"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "borrower by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:2048/api/data/64fc8d5f-401f-4e47-a7cb-5e5783819fc2",
+					"host": [
+						"localhost"
+					],
+					"port": "2048",
+					"path": [
+						"api",
+						"data",
+						"64fc8d5f-401f-4e47-a7cb-5e5783819fc2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "language Edit By ID",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\t\"DatePurchase\" : \"20151100275\",\n\t\t\"Amount_due__c\" : \"10\",\n\t\t\"Discount__c\" : \"12.1\",\n\t\t\"GST__c\" : \"1\"\n\t}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2048/api/data/613049393030303030305378333332454142",
+					"host": [
+						"localhost"
+					],
+					"port": "2048",
+					"path": [
+						"api",
+						"data",
+						"613049393030303030305378333332454142"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "language Delete By ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"language\": \"Go!\",\n    \"appeared\": 2009,\n    \"created\": [\n        \"Robert Griesemer\",\n        \"Rob Pike\",\n        \"Ken Thompson\"\n    ],\n    \"functional\": true,\n    \"object-oriented\": false,\n    \"relation\": {\n        \"influenced-by\": [\n            \"C\",\n            \"Python\",\n            \"Pascal\",\n            \"Smalltalk\",\n            \"Modula\"\n        ],\n        \"influences\": [\n            \"Odin\",\n            \"Crystal\",\n            \"Zig\"\n        ]\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:2048/api/data/47abbf20-85a6-4270-a99b-11d1d6059c35",
+					"host": [
+						"localhost"
+					],
+					"port": "2048",
+					"path": [
+						"api",
+						"data",
+						"47abbf20-85a6-4270-a99b-11d1d6059c35"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
